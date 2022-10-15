@@ -1,7 +1,7 @@
 package org.his.serviceImpl;
 
-import org.his.bean.ApplicationRegisteration;
-import org.his.binding.CitizinAppRegisBinding;
+import org.his.bean.CitizinAppEntity;
+import org.his.binding.CitizenApp;
 import org.his.repository.CitizinAppRepo;
 import org.his.service.ApplicationRegiService;
 import org.springframework.beans.BeanUtils;
@@ -17,25 +17,25 @@ public class ApplicationRepoServiceImpl implements ApplicationRegiService {
 	private CitizinAppRepo citizinAppRepo;
 
 	@Override
-	public Integer createApplication(CitizinAppRegisBinding app) {
+	public Integer createApplication(CitizenApp app) {
 
-		String endPointUrl = "https://ssa.web-api.herokuapp.com/ssn/{ssn}";
+		String endPointUrl = "https://ssa-web-api.herokuapp.com/ssn/{ssn}";
 
 		RestTemplate rt = new RestTemplate();
 
-		ResponseEntity<String> resentity = rt.getForEntity(endPointUrl, String.class, app.getSsn());
+		ResponseEntity<String> resEntity = rt.getForEntity(endPointUrl, String.class, app.getSsn());
 
-		String stateName=resentity.getBody();
+		String stateName=resEntity.getBody();
 		
-		if("New Jersy".equals(stateName)) {
+		if("New Jersey".equals(stateName)) {
 			
-			ApplicationRegisteration appReg=new ApplicationRegisteration();
+			CitizinAppEntity entity=new CitizinAppEntity();
 			
-			BeanUtils.copyProperties(app, appReg);
+			BeanUtils.copyProperties(app, entity);
 			
-			appReg.setStateName(stateName);
+			entity.setStateName(stateName);
 
-			ApplicationRegisteration save=citizinAppRepo.save(appReg);
+			CitizinAppEntity save=citizinAppRepo.save(entity);
 			
 			return save.getAppId();
 		}

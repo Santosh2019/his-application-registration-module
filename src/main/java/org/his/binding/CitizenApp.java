@@ -1,6 +1,6 @@
 package org.his.binding;
 
-public class CitizinAppRegisBinding {
+public class CitizenApp {
 	
 	private Integer appId;
 

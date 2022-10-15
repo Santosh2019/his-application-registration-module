@@ -1,6 +1,6 @@
 package org.his.controller;
 
-import org.his.binding.CitizinAppRegisBinding;
+import org.his.binding.CitizenApp;
 import org.his.service.ApplicationRegiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class AppRegisController {
 	private ApplicationRegiService applicationRegi;
 
 	@PostMapping("/app")
-	public ResponseEntity<String> registration(@RequestBody CitizinAppRegisBinding app) {
+	public ResponseEntity<String> registration(@RequestBody CitizenApp app) {
 
 		Integer appId = applicationRegi.createApplication(app);
 
@@ -27,6 +27,7 @@ public class AppRegisController {
 			return new ResponseEntity<>("Invalid ssn", HttpStatus.BAD_REQUEST);
 		}
 	}
+		
 	
 	@GetMapping("/msg")
 	public String getMst() {

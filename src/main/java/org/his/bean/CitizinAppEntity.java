@@ -1,53 +1,46 @@
 package org.his.bean;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
 @Entity
-@Table
+@Table(name="Citizen_App")
 @Data
-public class ApplicationRegisteration {
+public class CitizinAppEntity {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "APP_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer appId;
 
-	@Column(name = "FULLNAME")
 	private String fullName;
 
-	@Column(name = "EMAIL")
 	private String email;
 	
-	@Column(name="PHONE_NUMBER")
 	private double phoneNumber;
 	
-	@Column(name="SSN")
-	private Integer ssn;
+	private Long ssn;
 	
-	@Column(name="GENDER")
 	private String gender;	
 	
-	@Column(name="STATE_NAME")
 	private String stateName;	
-	
-	@Column(name = "CREATE_DATE")
-	private Date create_date;
+	@CreationTimestamp
+	private LocalDate create_date;
 
-	@Column(name = "UPDATE_DATE")
-	private Date update_date;
+	@UpdateTimestamp
+	private LocalDate update_date;
 
-	@Column(name="CREATED_BY")
 	private String createdBy;
 	
-	@Column(name="updated_by")
 	private String updatedBy;
 
 	public Integer getAppId() {
@@ -82,11 +75,11 @@ public class ApplicationRegisteration {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Integer getSsn() {
+	public Long getSsn() {
 		return ssn;
 	}
 
-	public void setSsn(Integer ssn) {
+	public void setSsn(Long ssn) {
 		this.ssn = ssn;
 	}
 
@@ -106,19 +99,19 @@ public class ApplicationRegisteration {
 		this.stateName = stateName;
 	}
 
-	public Date getCreate_date() {
+	public LocalDate getCreate_date() {
 		return create_date;
 	}
 
-	public void setCreate_date(Date create_date) {
+	public void setCreate_date(LocalDate create_date) {
 		this.create_date = create_date;
 	}
 
-	public Date getUpdate_date() {
+	public LocalDate getUpdate_date() {
 		return update_date;
 	}
 
-	public void setUpdate_date(Date update_date) {
+	public void setUpdate_date(LocalDate update_date) {
 		this.update_date = update_date;
 	}
 
